@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Psychic Game</title>
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-offset-2 col-md-8">
+        <h1 id="Psychic">Psychic Game</h1>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-offset-2 col-md-8">
+        <h2>Guess what letter i am thinking of ... </h2>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-offset-2 col-md-8">
+        <h3> win:
+          <span id="won-text">0</span>
+        </h3>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-offset-2 col-md-8">
+        <h3> losses:
+          <span id="lost-text">0</span>
+        </h3>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-offset-2 col-md-8">
+        <h3> Gusses Left:
+          <span id="Gusses-Left">9</span>
+        </h3>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-offset-2 col-md-8">
+        <h3> Your Gusses so far
+          <span id="user-text">
+            <strong>...Nothing.</strong>
+          </span>
+        </h3>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    // Creates an array that lists out all of the options (Rock, Paper, or Scissors).
+    var computerChoices = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "k", "l", "m", "n", "o", "p", "q", "r", "s",
+      "t", "u", "v", "w", "x", "y", "z"
+    ];
+
+    // Creating variables to hold the number of wins, losses, and ties. They start at 0.
+    var wins = 0;
+    var losses = 0;
+    var guessesLeft = 9;
+    var userText = document.getElementById("user-text");
+    var GussesText = document.getElementById("Gusses-Left");
+    var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+    // This function is run whenever the user presses a key.
+
+    document.onkeyup = function (event) {
+      if (guessesLeft === 0) {
+        return;
+      }
+      // Determines which key was pressed.
+      console.log(guessesLeft);
+
+
+      var userGuess = event.key;
+      if (guessesLeft === 9) {
+        userText.textContent = userGuess;
+      } else {
+        userText.textContent += userGuess;
+      }
+      // var LoweruserGuess =userGuess.toLowerCase();
+      guessesLeft--;
+
+      GussesText.textContent = guessesLeft;
+
+
+      if (userGuess === computerGuess) {
+
+
+
+        wins = wins + 1;
+        guessesLeft = 0;
+
+        document.querySelector("#Psychic").innerHTML = "You chose: " + userGuess + ". The computer chose: " +
+          computerGuess;
+        GussesText.textContent = guessesLeft;
+        document.querySelector("#won-text").innerHTML = wins;
+      }
+
+      if (guessesLeft === 0 && userGuess !== computerGuess) {
+
+
+        losses = losses + 1;
+        document.querySelector("#lost-text").innerHTML = losses;
+      }
+      console.log("Computer Guess: " + computerGuess);
+      console.log("user Guess: " + userGuess);
+
+
+
+    }
+  </script>
+
+</body>
+
+</html>
